@@ -2,6 +2,7 @@ using EmployeeManagementSystem_Enlighten_Schola;
 using EmployeeManagementSystem_Enlighten_Schola.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeManagementSystem_Enlighten_Schola.Pages.Admin
@@ -34,6 +35,18 @@ namespace EmployeeManagementSystem_Enlighten_Schola.Pages.Admin
                 return RedirectToPage("/Index");
             if (!ModelState.IsValid)
                 return Page();
+
+            var existingUser = await _dbContext.Employees
+        .FirstOrDefaultAsync(e =>
+            e.UserName == $"{employeeModel.FirstName.ToLower()}_{employeeModel.LastName.ToLower()}"
+            || e.Email == employeeModel.Email
+            || e.Mobile == employeeModel.Mobile);
+
+            if (existingUser != null)
+            {
+                ModelState.AddModelError(string.Empty, "Username, Email, or Mobile number already exists.");
+                return Page();
+            }
 
             string profilePath = await SaveImageAsync(employeeModel.ProfilePhoto);
 
