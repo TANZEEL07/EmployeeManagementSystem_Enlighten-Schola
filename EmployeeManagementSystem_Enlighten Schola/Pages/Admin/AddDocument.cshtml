@@ -1,0 +1,40 @@
+﻿@page
+@model EmployeeManagementSystem_Enlighten_Schola.Pages.Admin.AddDocumentModel
+@{
+    ViewData["Title"] = "Add Document";
+}
+
+<h2 class="text-center mb-4">Add Document for Employee @Model.EmployeeId</h2>
+
+<div class="d-flex justify-content-center">
+    <form method="post" enctype="multipart/form-data" style="max-width: 900px; width: 100%;">
+        <div class="row align-items-end gx-2">
+            <div class="col-md-3 mb-3">
+                <label asp-for="Number" class="form-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label asp-for="DocumentName" class="form-label"></label>
+                <input asp-for="DocumentName" class="form-control" />
+                <span asp-validation-for="DocumentName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label asp-for="DocumentFile" class="form-label"></label>
+                <input asp-for="DocumentFile" type="file" class="form-control" />
+                <span asp-validation-for="DocumentFile" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">Upload</button>
+                <a asp-page="/Admin/ViewEmployee" asp-route-id="@Model.EmployeeId" class="btn btn-secondary w-100">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,74 @@
+﻿@page
+@model EmployeeManagementSystem_Enlighten_Schola.Pages.Employee.EmployeeProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+<h2>My Profile</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Model.Employee.ProfilePhotoPath" class="img-thumbnail" style="max-height: 250px;" />
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered">
+            <tr><th>Full Name</th><td>@Model.Employee.FirstName @Model.Employee.LastName</td></tr>
+            <tr><th>Username</th><td>@Model.Employee.UserName</td></tr>
+            <tr><th>Email</th><td>@Model.Employee.Email</td></tr>
+            <tr><th>Mobile</th><td>@Model.Employee.Mobile</td></tr>
+            <tr><th>Gender</th><td>@Model.Employee.Gender</td></tr>
+            <tr><th>Date of Birth</th><td>@Model.Employee.DOB.ToShortDateString()</td></tr>
+            <tr><th>Date of Joining</th><td>@Model.Employee.DOJ.ToShortDateString()</td></tr>
+            <tr><th>Designation</th><td>@Model.Employee.Designation</td></tr>
+            <tr><th>Address</th><td>@Model.Employee.Address, @Model.Employee.City - @Model.Employee.PinCode</td></tr>
+            <tr>
+                <th>Status</th>
+                <td>
+                    @if (Model.Employee.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactive</span>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<h3>My Documents</h3>
+
+@if (Model.Documents != null && Model.Documents.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Uploaded At</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doc in Model.Documents)
+            {
+                <tr>
+                    <td>@doc.Number</td>
+                    <td>@doc.Name</td>
+                    <td>@doc.UploadedAt.ToLocalTime().ToString("g")</td>
+                    <td>
+                        <a asp-page="./EmployeeProfile"
+                           asp-page-handler="DownloadDocument"
+                           asp-route-id="@doc.Id"
+                           class="btn btn-sm btn-outline-primary">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">No documents available.</div>
+}

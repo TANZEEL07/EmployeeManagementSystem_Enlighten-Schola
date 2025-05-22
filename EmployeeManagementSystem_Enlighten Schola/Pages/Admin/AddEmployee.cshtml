@@ -1,0 +1,89 @@
+﻿@page
+@model EmployeeManagementSystem_Enlighten_Schola.Pages.Admin.AddEmployeeModel
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<h2 class="text-center mb-4">Add Employee</h2>
+
+<form method="post" enctype="multipart/form-data" class="w-75 mx-auto border p-4 rounded shadow">
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="employeeModel.FirstName" class="form-label"></label>
+            <input asp-for="employeeModel.FirstName" class="form-control" />
+            <span asp-validation-for="employeeModel.FirstName" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.LastName" class="form-label"></label>
+            <input asp-for="employeeModel.LastName" class="form-control" />
+            <span asp-validation-for="employeeModel.LastName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="employeeModel.Gender" class="form-label"></label>
+            <select asp-for="employeeModel.Gender" class="form-select">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.DOB" class="form-label"></label>
+            <input asp-for="employeeModel.DOB" type="date" class="form-control" />
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.DOJ" class="form-label"></label>
+            <input asp-for="employeeModel.DOJ" type="date" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="employeeModel.Mobile" class="form-label"></label>
+            <input asp-for="employeeModel.Mobile" class="form-control" />
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.Email" class="form-label"></label>
+            <input asp-for="employeeModel.Email" type="email" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="employeeModel.Designation" class="form-label"></label>
+            <input asp-for="employeeModel.Designation" class="form-control" />
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.Address" class="form-label"></label>
+            <input asp-for="employeeModel.Address" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="employeeModel.City" class="form-label"></label>
+            <input asp-for="employeeModel.City" class="form-control" />
+        </div>
+        <div class="col">
+            <label asp-for="employeeModel.PinCode" class="form-label"></label>
+            <input asp-for="employeeModel.PinCode" class="form-control" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="employeeModel.ProfilePhoto" class="form-label"></label>
+        <input asp-for="employeeModel.ProfilePhoto" type="file" class="form-control" />
+    </div>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Save Employee</button>
+        <a asp-page="/Admin/Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
